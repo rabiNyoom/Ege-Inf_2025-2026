@@ -1,11 +1,11 @@
 from itertools import *
 
-count = 0
+c = 0
 
 for p in product('ИВАН', repeat=5):
     if 'И' in p:
-        count += 1
+        c += 1
 
-print(count)
+print(c)
 
 # 781

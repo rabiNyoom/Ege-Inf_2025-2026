@@ -1,4 +1,4 @@
-def algo(n: int) -> int:
+def algo(n):
     nbin = bin(n)[2:]
 
     if n % 2 == 0:
