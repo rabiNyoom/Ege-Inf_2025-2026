@@ -4,3 +4,4 @@
 
 - [Решу ЕГЭ](https://inf-ege.sdamgia.ru/)
 - [ФИПИ](https://ege.fipi.ru/bank/)
+- [КЕГЭ](https://kompege.ru/task)
