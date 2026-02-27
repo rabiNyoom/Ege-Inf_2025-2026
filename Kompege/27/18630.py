@@ -22,9 +22,12 @@ for f in files:
                 data.remove(p1)
             clusters[-1].extend(close_by)
     clusters = [cl for cl in clusters if len(cl) >= 30]
-    print('Clusters:', *map(len, clusters))
+    # print('Clusters:', *map(len, clusters))
 
     centroids = [centroid(cl) for cl in clusters]
     px = int(abs(sum([x for x, y in centroids]) / len(centroids) * 100000))
     py = int(abs(sum([y for x, y in centroids]) / len(centroids) * 100000))
     print(px, py)
+
+# 559397 625605
+# 923413 613488

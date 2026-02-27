@@ -30,3 +30,6 @@ for f in files:
     px = int(abs(sum([x for x, y in centroids]) / len(centroids) * 1000))
     py = int(abs(sum([y for x, y in centroids]) / len(centroids) * 1000))
     print(px, py)
+
+# 23509 554
+# 3078 4758

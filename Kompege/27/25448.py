@@ -22,7 +22,7 @@ def a():
                 data.remove(p1)
             clusters[-1].extend(close_by)
     clusters = [cl for cl in clusters if len(cl) > 1]
-    print('Clusters:', *map(len, clusters))
+    # print('Clusters:', *map(len, clusters))
 
     centroids = [centroid(cl) for cl in clusters]
     px = int(abs((centroids[0][0] - centroids[1][0]) * 10000))
@@ -45,7 +45,7 @@ def b():
                 data.remove(p1)
             clusters[-1].extend(close_by)
     clusters = [cl for cl in clusters if len(cl) > 1]
-    print('Clusters:', *map(len, clusters))
+    # print('Clusters:', *map(len, clusters))
 
     clmin = min(clusters, key=len)
     clmax = max(clusters, key=len)
@@ -62,3 +62,6 @@ def b():
 
 a()
 b()
+
+# 15342 115607
+# 9762 9518

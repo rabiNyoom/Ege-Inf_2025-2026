@@ -36,11 +36,11 @@ def b():
     while data:
         clusters.append([data.pop()])
         for p in clusters[-1]:
-            close_by = [p1 for p1 in data if dist(p, p1) < 5]
+            close_by = [p1 for p1 in data if dist(p, p1) < 1]
 
-        for p1 in close_by:
-            data.remove(p1)
-        clusters[-1].extend(close_by)
+            for p1 in close_by:
+                data.remove(p1)
+            clusters[-1].extend(close_by)
     # print('Clusters:', *map(len, clusters))
     clusters = [cl for cl in clusters if len(cl) > 1]
     centroids = [centroid(cl) for cl in clusters]
@@ -52,3 +52,6 @@ def b():
 
 a()
 b()
+
+# 27784 104799
+# 210416 136231
