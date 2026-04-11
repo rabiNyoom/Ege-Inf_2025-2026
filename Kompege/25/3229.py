@@ -1,7 +1,6 @@
-from fnmatch import fnmatch
-
-for n in range(0, 10**9+1, 17):
-    if fnmatch(str(n), '12345?6?8'):
-        print(n, n//17)
-    if n > 200000000:
-        break
+d = '0123456789'
+for a in d:
+    for b in d:
+        n = int(f'12345{a}6{b}8')
+        if n % 17 == 0:
+            print(n, n//17)
