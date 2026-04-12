@@ -1,41 +1,36 @@
-#include <iostream>
-#include <cmath>
 #include <algorithm>
+#include <cmath>
+#include <iostream>
 
-int findd(int n) {
-    int fnd = 0;
-    int m = 0;
-    int nd;
-    for (int d = 1; d < std::floor(std::sqrt(n)) + 1; d++) {
-        if (n % d == 0) {
-            if (d % 2 == 1) {
-                fnd++;
-                m = std::max(m, d);
-            }
-            if (d * d != n) {
-                nd = n / d;
-                if (nd % 2 == 1) {
-                    fnd++;
-                    m = std::max(m, nd);
-                }
-            }
-            if (fnd > 5) {
-                return 0;
-            }
-        }
+using namespace std;
+
+int F(int n) {
+  int c = 0;
+  int m = 0;
+  int lim = sqrt(n);
+  for (int d = 1; d <= lim; d++) {
+    if (n % d == 0) {
+      if (d % 2 == 1) {
+        c++;
+        m = max(m, d);
+      }
+      int dd = n / d;
+      if (dd % 2 == 1 && dd * dd != n) {
+        c++;
+        m = max(m, d);
+      }
     }
-    if (fnd == 5) {
-        return m;
-    }
-    return 0;
+  }
+  if (c == 5)
+    return m;
+  return 0;
 }
 
 int main() {
-    for (int n = 55000000; n <= 60000000; n++) {
-        int del = findd(n);
-        if (del != 0) {
-            std::cout << n << ' ' << del << '\n';
-        }
+  for (int n = 55000000; n <= 60000000; n++) {
+    int r = F(n);
+    if (r) {
+      cout << n << ' ' << r << '\n';
     }
-    return 0;
+  }
 }
