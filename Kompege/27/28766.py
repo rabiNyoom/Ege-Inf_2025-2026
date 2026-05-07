@@ -3,7 +3,7 @@ from math import hypot
 
 
 def dist(a, b):
-    return hypot(a[0] - b[0], a[1] - b[1])
+    return hypot(a[0]-b[0], a[1]-b[1])
 
 
 def centr(cl):
@@ -14,27 +14,32 @@ def centr(cl):
     return min(m)[1]
 
 
-def count_ygs(cl):
-    return sum(1 for p in cl if re.match(r"^Z\d*I$", p[2]))
+def count_yg(cl):
+    return sum(1 for p in cl if re.match(r'^Z\d*I$', p[2]))
 
 
-def yg_inner_dist(cl):
-    ygs = [p for p in cl if re.match(r"^Z\d*I$", p[2])]
-    min_dist = float("inf")
+def min_yg_d(cl):
+    ygs = [p for p in cl if re.match(r'^Z\d*I$', p[2])]
+    md = set()
     for p in ygs:
         for p1 in ygs:
-            d = dist(p, p1)
-            if d != 0 and d < min_dist:
-                min_dist = d
-    return min_dist
+            md.add(dist(p, p1))
+    md.remove(0)
+    if len(md) == 0:
+        return float('inf')
+    return min(md)
 
 
 def a():
+    red_giants = []
     data = []
-    for l in open("28766_A.txt"):
-        x, y, s = l.replace(",", ".").split()
-        data.append([float(x), float(y), s])
-    red_giants = [p for p in data if re.match(r"^Y\d*III$", p[2])]
+    for l in open('28766_A.txt'):
+        l = l.replace(',', '.')
+        x, y, s = l.split()
+        point = [float(x), float(y), s]
+        data.append(point)
+        if re.match(r'^Y\d*III$', s):
+            red_giants.append(point)
     clus = []
     while data:
         clus.append([data.pop()])
@@ -43,18 +48,20 @@ def a():
             for p1 in close:
                 data.remove(p1)
             clus[-1].extend(close)
-    mi_cen = centr(min(clus, key=len))
-    red_dists = [dist(mi_cen, p) for p in red_giants]
-    a1 = int(abs(min(red_dists) * 10000))
-    a2 = int(abs(max(red_dists) * 10000))
+    centrmin = centr(min(clus, key=len))
+    rg_dists = [dist(centrmin, p) for p in red_giants]
+    a1 = int(abs(min(rg_dists) * 10000))
+    a2 = int(abs(max(rg_dists) * 10000))
     print(a1, a2)
 
 
 def b():
     data = []
-    for l in open("28766_B.txt"):
-        x, y, s = l.replace(",", ".").split()
-        data.append([float(x), float(y), s])
+    for l in open('28766_B.txt'):
+        l = l.replace(',', '.')
+        x, y, s = l.split()
+        point = [float(x), float(y), s]
+        data.append(point)
     clus = []
     while data:
         clus.append([data.pop()])
@@ -63,13 +70,10 @@ def b():
             for p1 in close:
                 data.remove(p1)
             clus[-1].extend(close)
-
-    ygs_to_cl = [(count_ygs(cl), cl) for cl in clus]
-    mi_cen = centr(min(ygs_to_cl)[1])
-    ma_cen = centr(max(ygs_to_cl)[1])
-
-    b1 = int(abs(min(yg_inner_dist(cl) for cl in clus) * 10000))
-    b2 = int(abs(dist(mi_cen, ma_cen) * 10000))
+    clus_to_yg = [(count_yg(cl), cl) for cl in clus]
+    b1 = int(abs(min(min_yg_d(cl) for cl in clus)) * 10000)
+    b2 = int(
+        abs(dist(centr(min(clus_to_yg)[1]), centr(max(clus_to_yg)[1]))) * 10000)
     print(b1, b2)
 
 
