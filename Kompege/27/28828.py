@@ -53,7 +53,7 @@ bc_to_cl = sorted(
 bcs = [p for p in clus_b[2] if fullmatch(r"L\d*V", p[2])]
 total = 0
 for i in range(len(bcs)):
-    for j in range(i, len(bcs)):
+    for j in range(i + 1, len(bcs)):
         total += dist(bcs[i], bcs[j])
 b1 = int(abs(total * 10000))
 b2 = int(abs(dist(centr(bc_to_cl[0][1]), centr(bc_to_cl[1][1])) * 10000))
